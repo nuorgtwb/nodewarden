@@ -93,12 +93,15 @@ async function handleWebsiteIcon(host: string): Promise<Response> {
   if (!normalizedHost) return handleNwFavicon();
 
   const fallbackHost = encodeURIComponent(normalizedHost);
+  const requestHeaders = { 'User-Agent': 'NodeWarden/1.0' };
   const upstreamSources: Array<{ url: string; headers?: HeadersInit }> = [
     {
       url: `https://icons.bitwarden.net/${fallbackHost}/icon.png`,
+      headers: requestHeaders,
     },
     {
       url: `https://icons.duckduckgo.com/ip3/${fallbackHost}.ico`,
+      headers: requestHeaders,
     },
   ];
 
